@@ -1,0 +1,19 @@
+version: "3.2"
+services:
+  border-ship:
+    container_name: border-ship
+    environment:
+        - MONGO_URL=mongodb://mongo-db:27017/bordership
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    links:
+      - mongo:mongo-db
+    depends_on:
+      - mongo
+  mongo:
+    container_name: mongo-db
+    image: mongo
+    ports:
+      - "27017:27017"
